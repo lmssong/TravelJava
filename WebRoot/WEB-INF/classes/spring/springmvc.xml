@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:aop="http://www.springframework.org/schema/aop" xmlns:task="http://www.springframework.org/schema/task"
+	xmlns:tx="http://www.springframework.org/schema/tx" xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:util="http://www.springframework.org/schema/util"
+	xsi:schemaLocation="http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-3.1.xsd
+            http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.2.xsd
+            http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.2.xsd
+            http://www.springframework.org/schema/task http://www.springframework.org/schema/task/spring-task-3.2.xsd
+            http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.2.xsd
+            http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-3.2.xsd
+            http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.2.xsd">
+
+	<!-- 注解扫描包 -->
+	<context:component-scan base-package="com.iss.sdb" />
+
+	<!-- 开启注解 -->
+	<mvc:annotation-driven>
+		<mvc:message-converters register-defaults="true">
+            <bean class="org.springframework.http.converter.StringHttpMessageConverter">
+                <constructor-arg value="UTF-8" />
+            </bean>
+        </mvc:message-converters>
+	</mvc:annotation-driven>
+
+	<!-- 配置 AspectJ -->
+	<aop:aspectj-autoproxy proxy-target-class="true" />
+
+	<!-- 配置静态资源，直接映射到对应的文件夹，不被DispatcherServlet处理，3.04新增功能，需要重新设置spring-mvc-3.0.xsd -->
+	<mvc:resources mapping="/images/**" location="/images/" />
+	<mvc:resources mapping="/js/**" location="/js/" />
+	<mvc:resources mapping="/css/**" location="/css/" />
+	<mvc:resources mapping="/fonts/**" location="/fonts/" />
+	<mvc:resources mapping="/resources/**" location="/resources/" />
+	<mvc:resources mapping="/plugins/**" location="/plugins/" />
+	<mvc:resources mapping="/favicon.ico" location="/favicon.ico" />
+
+	<!-- 定义跳转的文件的前后缀 ，视图模式配置 -->
+	<bean
+		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<!-- 这里的配置我的理解是自动给后面action的方法return的字符串加上前缀和后缀，变成一个 可用的url地址 -->
+		<property name="prefix" value="/WEB-INF/views/" />
+		<property name="suffix" value=".jsp" />
+	</bean>
+
+
+	<bean id="json.mappingJacksonHttpMessageConverter"
+		class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">
+		<property name="supportedMediaTypes" value="application/json;charset=UTF-8" />
+	</bean>
+
+	<bean
+		class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter">
+		<property name="messageConverters">
+			<list>
+				<bean
+					class="org.springframework.http.converter.ByteArrayHttpMessageConverter" />
+				<ref bean="json.mappingJacksonHttpMessageConverter" />
+			</list>
+		</property>
+	</bean>
+
+</beans>

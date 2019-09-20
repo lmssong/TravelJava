@@ -1,0 +1,9 @@
+﻿####1。请在tomcat 的server.xml 配置<Context docBase="E:\upload\resources" path="/tourism/resources"/>   服务在哪个盘就设那个盘的
+#### 另外之前测试的图片unload压缩包就在根目录下 如果有需要可以放到指定盘的根目录
+###2. 数据库名massage 用户名root  密码123456
+###3.访问地址 前台：http://127.0.0.1:8080/tourism/w/index
+		   后台：http://127.0.0.1:8080/tourism/m/index
+		   超级管理员：用户名：admin  密码：a123456
+	   
+		   
+###4.开发环境 eclipse10 jdk 1.7 tomcat7

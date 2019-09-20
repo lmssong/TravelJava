@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- namespace：必须与对应的接口全类名一致 id:必须与对应接口的某个对应的方法名一致 -->
+<mapper namespace="com.iss.sdb.pet.dao.UserMapper">
+	<!-- 用户表数据列 -->
+	<sql id="UserMapperColumns">
+		a.id AS "id",
+		a.user_name AS "userName",
+		a.password AS "password",
+		a.name AS "name",
+		a.sex AS "sex",
+		a.role AS "role",
+		a.integral AS "integral",
+		a.create_time AS "createTime"
+	</sql>
+	<sql id="userJoins">
+	</sql>
+	<!-- 获取单个用户信息 -->
+	<select id="get" resultType="UserModel">
+		SELECT
+		<include refid="UserMapperColumns" />
+		FROM t_user a
+		<include refid="userJoins" />
+		WHERE a.id = #{id}
+	</select>
+	
+	<!-- 获取单个用户信息 -->
+	<select id="getUser" resultType="UserModel">
+		SELECT
+		<include refid="UserMapperColumns" />
+		FROM t_user a
+		<include refid="userJoins" />
+		WHERE a.user_name = #{userName}
+	</select>
+
+	<!-- 分页查询用户 -->
+	<select id="findPage" resultType="UserModel">
+		SELECT
+		<include refid="UserMapperColumns" />
+		FROM t_user a
+		<where>
+			1 = 1
+			<if test="role!=null and role!=''">
+				and a.role = #{role}
+			</if>
+		</where>
+		order by a.create_time desc
+	</select>
+
+	<!-- 查询用户分页列表 -->
+	<select id="findList" resultType="UserModel">
+		SELECT
+		<include refid="UserMapperColumns" />
+		FROM t_user a
+		<where>
+			1 = 1
+			<if test="role!=null and role!=''">
+				and a.role = #{role}
+			</if>
+		</where>
+		order by a.create_time desc
+	</select>
+
+	<!-- 新增用户 -->
+	<insert id="add" keyProperty="id" parameterType="UserModel">
+		INSERT INTO
+		t_user (
+		user_name,
+		password,
+		name,
+		sex,
+		role,
+		integral,
+		create_time
+		)VALUES(
+		#{userName},
+		#{password},
+		#{name},
+		#{sex},
+		#{role},
+		#{integral},
+		SYSDATE()
+		)
+	</insert>
+
+	<!-- 更新用户信息 -->
+	<update id="update">
+		UPDATE t_user SET
+			user_name = #{userName},
+			password = #{password},
+			name = #{name},
+			sex = #{sex},
+			integral = #{integral}
+		WHERE id = #{id}
+	</update>
+
+	<!-- 删除用户 (假删除) -->
+	<delete id="delete">
+		delete * from t_user WHERE id = #{id}
+	</delete>
+
+	<!-- 校验用户是否唯一 -->
+	<select id="checkAccount" resultType="UserModel">
+		SELECT
+		<include refid="UserMapperColumns" />
+		FROM t_user a
+		WHERE a.user_name = #{userName}
+		<if test="id!=null and id!=''">
+			and a.id != #{id}
+		</if>
+	</select>
+</mapper>

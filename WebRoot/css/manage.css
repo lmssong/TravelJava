@@ -1,0 +1,181 @@
+@font-face {
+    font-family: 'FontAwesome';
+    src: url('../fonts/fontawesome-webfont.eot?v=4.1.0');
+    src: url('../fonts/fontawesome-webfont.eot?#iefix&v=4.1.0') format('embedded-opentype'), url('../fonts/fontawesome-webfont.woff?v=4.1.0') format('woff'), url('../fonts/fontawesome-webfont.ttf?v=4.1.0') format('truetype'), url('../plugins/fontawesome-webfont.svg?v=4.1.0#fontawesomeregular') format('svg');
+    font-weight: normal;
+    font-style: normal
+}
+body{
+    background: #fff;
+}
+label{
+	font-size:12px;
+}
+table{
+	font-size:12px;
+}
+img {
+    vertical-align: middle;
+}
+img {
+    border: 0;
+}
+
+a,a:hover{
+    text-decoration: none;
+}
+
+.fl{
+    float: left;
+}
+
+.fr{
+    float: right;
+}
+.small, small {
+    font-size: 85%;
+}
+
+i, cite, em, var, address, dfn {
+    font-style: italic;
+}
+.fa-leaf:before {
+    content: "\f06c";
+}
+:after, :before {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+.fa {
+    display: inline-block;
+    font-family: FontAwesome;
+    font-style: normal;
+    font-weight: normal;
+    line-height: 1;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale
+}
+
+.fa-lg {
+    font-size: 1.33333333em;
+    line-height: .75em;
+    vertical-align: -15%
+}
+
+
+/*easyui定制样式*/
+.panel-header, .panel-body{
+    border-color: #ddd;
+}
+.panel-title{
+    padding-left: 10px;
+}
+/**********页头样式*************/
+#header{
+    margin: 0;
+    padding-left: 0;
+    padding-right: 0;
+    border-width: 0;
+    border-radius: 0;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+    min-height: 45px;
+    background: #428fb9;
+}
+
+#header .navbar-brand{
+    font-size: 24px;
+    line-height: 20px;
+    padding: 10px 15px;
+    text-decoration: none;
+    text-shadow: none;
+    float: left;
+    color: #fff;
+}
+
+#header .uinfo {
+    font-size: 14px;
+    line-height: 44px;
+    color: #fefefe;
+    margin-right: 30px;
+    float: right;
+}
+/***********左侧菜单***********/
+#l_menu{
+    width:190px;
+}
+#l_menu .panel-title{
+    padding-left: 20px;
+}
+#wnav a{
+    color: #333;
+}
+.easyui-accordion ul{list-style-type:none;margin:0px; padding:10px;}
+.easyui-accordion ul li{ padding:0px;}
+.easyui-accordion ul li a{line-height:24px;}
+.easyui-accordion ul li div{margin:2px 0px;padding-left:10px;padding-top:2px;}
+.easyui-accordion ul li div.hover{border:1px dashed #99BBE8; background:#E0ECFF;cursor:pointer;}
+.easyui-accordion ul li div.hover a{color:#416AA3;}
+.easyui-accordion ul li div.selected{border:1px solid #99BBE8; background:#E0ECFF;cursor:default;}
+.easyui-accordion ul li div.selected a{color:#416AA3; font-weight:bold;}
+
+
+
+.icon{ background:url(../image/tabicons.png) no-repeat;width:18px; line-height:18px; display:inline-block;}
+.icon-sys{ background-position:0px -200px;}
+.icon-set{ background-position:-380px -200px;}
+.icon-add{/*background-position: -20px 0px;*/}
+.icon-add1{background:url('icon/edit_add.png') no-repeat;}
+.icon-nav{background-position: -100px -20px; }
+.icon-users{background-position: -100px -480px;}
+.icon-role{background-position: -360px -200px;}
+.icon-set{background-position: -380px -200px;}
+.icon-log{background-position: -380px -80px;}
+.icon-delete16{background:url('icon/delete.gif') no-repeat;width:18px; line-height:18px; display:inline-block;}
+.icon-delete{ background-position:-140px -120px;}
+.icon-edit{ /*background-position:-380px -320px;*/}
+.icon-magic{ background-position:0px -500px;}
+.icon-database{ background-position:-20px -140px;}
+.icon-expand{ background:url('/image/coll2.gif') no-repeat;}
+.icon-collapse{ background:url('/image/coll3.gif') no-repeat;}
+
+#main_content{
+    overflow: hidden;
+}
+#main_content iframe{
+    width: 100%;
+    height: 100%;
+    border: none;
+    overflow: hidden;
+}
+/***********footer*************/
+#footer{
+    padding-bottom: 10px;
+    border-top: 1px solid #ddd;
+    background: #428fb9;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+#footer p {
+    font-size: 12px;
+    color: #fff;
+    text-align: center;
+    text-indent: 0;
+    line-height: 100%;
+    margin: 10px 0;
+    padding: 0
+}
+
+.ft_footer_link{
+    margin-top: 18px !important;
+}
+.ft_footer_link a {
+    font-family: Arial, Helvetica, sans-serif;
+    color: #fff;
+    margin: 0 10px
+}
+
+.ft_footer_link a:hover {
+    color: #C00
+}

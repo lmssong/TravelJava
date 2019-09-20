@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE taglib PUBLIC "-//Sun Microsystems, Inc.//DTD JSP Tag Library 1.2//EN"
+	"http://java.sun.com/dtd/web-jsptaglibrary_1_2.dtd">
+<taglib>
+	<tlib-version>1.0</tlib-version>
+	<jsp-version>1.2</jsp-version>
+	<short-name>w</short-name>
+	<uri>http://www..com/widget</uri>
+	<tag>
+		<name>turnPage</name>
+		<tag-class>com.iss.sdb.commons.utils.tag.TurnPageTag</tag-class>
+		<body-content>empty</body-content>
+		<attribute>
+			<name>page</name>
+			<required>true</required>
+			<rtexprvalue>true</rtexprvalue>
+			<type>com.sime.workcat.entity.Page</type>
+		</attribute>
+		<attribute>
+			<name>requestPath</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<name>prefix</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+	</tag>
+	<tag>
+		<name>retainValue</name>
+		<tag-class>com.iss.sdb.commons.utils.tag.RetainValueTag</tag-class>	
+		<body-content>empty</body-content>
+		<attribute>
+			<name>page</name>
+			<required>true</required>
+			<rtexprvalue>true</rtexprvalue>
+			<type>com.sime.workcat.entity.Page</type>
+		</attribute>
+		<attribute>
+			<name>prefix</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+	</tag>
+	<tag>
+		<name>search</name>
+		<tag-class>com.iss.sdb.commons.utils.tag.SearchTag</tag-class>	
+		<body-content>empty</body-content>
+		<attribute>
+			<name>onclick</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+	</tag>
+</taglib>

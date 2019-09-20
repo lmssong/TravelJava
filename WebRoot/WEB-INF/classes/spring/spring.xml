@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:aop="http://www.springframework.org/schema/aop" xmlns:task="http://www.springframework.org/schema/task"
+	xmlns:tx="http://www.springframework.org/schema/tx" xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:util="http://www.springframework.org/schema/util"
+	xsi:schemaLocation="http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-3.1.xsd
+            http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.2.xsd
+            http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.2.xsd
+            http://www.springframework.org/schema/task http://www.springframework.org/schema/task/spring-task-3.2.xsd
+            http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.2.xsd
+            http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-3.2.xsd 
+            http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.2.xsd">
+
+
+	<bean id="propertiesHolder" class="com.iss.sdb.commons.utils.PropertiesHolder">
+		<property name="locations">
+			<list>
+				<value>classpath:configuration.properties</value>
+			</list>
+		</property>
+	</bean>
+
+	<bean id="jdbc.dataSource" class="org.apache.commons.dbcp.BasicDataSource"
+		destroy-method="close">
+		<property name="driverClassName" value="${sys.jdbc.driver}" />
+		<property name="url" value="${sys.jdbc.url}" />
+		<property name="username" value="${sys.jdbc.username}" />
+		<property name="password" value="${sys.jdbc.password}" />
+		<property name="initialSize" value="${sys.jdbc.initialSize}" />
+		<property name="maxActive" value="${sys.jdbc.maxActive}" />
+		<property name="maxIdle" value="${sys.jdbc.maxIdle}" />
+		<property name="minIdle" value="${sys.jdbc.minIdle}" />
+		<property name="maxWait" value="${sys.jdbc.maxWait}" />
+	</bean>
+
+	<bean id="paginationInterceptor" class="com.iss.sdb.commons.paginations.PaginationInterceptor" />
+
+	<bean id="jdbc.sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<property name="dataSource" ref="jdbc.dataSource" />
+		<property name="typeAliasesPackage" value="com.iss.sdb" />
+		<property name="typeAliasesSuperType" value="com.iss.sdb.commons.persistence.BasicModel" />
+		<property name="mapperLocations" value="classpath:/com/iss/sdb/**/*.xml" />
+		<property name="configLocation" value="classpath:/mybatis/mybatis.xml" />
+		<property name="plugins" ref="paginationInterceptor" />
+	</bean>
+
+	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+		<property name="basePackage" value="com.iss.sdb.**.dao" />
+		<property name="sqlSessionFactoryBeanName" value="jdbc.sqlSessionFactory" />
+	</bean>
+
+	<bean id="jdbc.transactionManager"
+		class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<property name="dataSource" ref="jdbc.dataSource" />
+	</bean>
+
+	<tx:annotation-driven transaction-manager="jdbc.transactionManager" proxy-target-class="true" />
+
+
+	<bean id="multipartResolver" class="com.iss.sdb.commons.utils.MultipartResolver">
+		<constructor-arg ref="propertiesHolder" />
+	</bean>
+</beans>

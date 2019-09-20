@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.iss.sdb.pet.dao.TTouristspotsMapper">
+    
+    <resultMap type="TTouristspots" id="TTouristspotsResult">
+        <result property="id"    column="id"    />
+        <result property="name"    column="name"    />
+        <result property="address"    column="address"    />
+        <result property="tel"    column="tel"    />
+        <result property="image"    column="image"    />
+        <result property="introduce"    column="introduce"    />
+        <result property="createTime"    column="create_time"    />
+    </resultMap>
+    
+    <sql id="selectTTouristspotsVo">
+        select id, name, address, tel, image, introduce, create_time from t_touristspots
+    </sql>
+    
+    <select id="findAll">
+        <include refid="selectTTouristspotsVo"/>
+    </select>
+	
+	<select id="findList" parameterType="TTouristspots" resultMap="TTouristspotsResult">
+        <include refid="selectTTouristspotsVo"/>
+        <where>  
+            
+             <if test="name != null  and name != '' "> and name = #{name}</if>
+             <if test="address != null  and address != '' "> and address = #{address}</if>
+             <if test="tel != null  and tel != '' "> and tel = #{tel}</if>
+             <if test="image != null  and image != '' "> and image = #{image}</if>
+             <if test="introduce != null  and introduce != '' "> and introduce = #{introduce}</if>
+             
+         </where>
+    </select>
+	
+    <select id="findPage" parameterType="TTouristspots" resultMap="TTouristspotsResult">
+        <include refid="selectTTouristspotsVo"/>
+        <where>  
+            
+             <if test="name != null  and name != '' "> and name = #{name}</if>
+             <if test="address != null  and address != '' "> and address = #{address}</if>
+             <if test="tel != null  and tel != '' "> and tel = #{tel}</if>
+             <if test="image != null  and image != '' "> and image = #{image}</if>
+             <if test="introduce != null  and introduce != '' "> and introduce = #{introduce}</if>
+             
+         </where>
+    </select>
+    
+    <select id="get" resultMap="TTouristspotsResult">
+        <include refid="selectTTouristspotsVo"/>
+        where id = #{id}
+    </select>
+    
+    <select id="getTTouristspots" resultMap="TTouristspotsResult">
+        <include refid="selectTTouristspotsVo"/>
+        <where>  
+            
+             <if test="name != null  and name != '' "> and name = #{name}</if>
+             <if test="address != null  and address != '' "> and address = #{address}</if>
+             <if test="tel != null  and tel != '' "> and tel = #{tel}</if>
+             <if test="image != null  and image != '' "> and image = #{image}</if>
+             <if test="introduce != null  and introduce != '' "> and introduce = #{introduce}</if>
+             
+         </where>
+    </select>
+        
+    <insert id="add" parameterType="TTouristspots" useGeneratedKeys="true" keyProperty="id">
+        insert into t_touristspots
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="name != null  and name != ''  ">name,</if>
+			<if test="address != null  and address != ''  ">address,</if>
+			<if test="tel != null  and tel != ''  ">tel,</if>
+			<if test="image != null  and image != ''  ">image,</if>
+			<if test="introduce != null  and introduce != ''  ">introduce,</if>
+			<if test="createTime != null  ">create_time,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="name != null  and name != ''  ">#{name},</if>
+			<if test="address != null  and address != ''  ">#{address},</if>
+			<if test="tel != null  and tel != ''  ">#{tel},</if>
+			<if test="image != null  and image != ''  ">#{image},</if>
+			<if test="introduce != null  and introduce != ''  ">#{introduce},</if>
+			<if test="createTime != null  ">#{createTime},</if>
+         </trim>
+    </insert>
+	 
+    <update id="update" parameterType="TTouristspots">
+        update t_touristspots
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="name != null  and name != ''  ">name = #{name},</if>
+            <if test="address != null  and address != ''  ">address = #{address},</if>
+            <if test="tel != null  and tel != ''  ">tel = #{tel},</if>
+            <if test="image != null  and image != ''  ">image = #{image},</if>
+            <if test="introduce != null  and introduce != ''  ">introduce = #{introduce},</if>
+            <if test="createTime != null  ">create_time = #{createTime},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+	<delete id="delete">
+        delete from t_touristspots where id = #{id}
+    </delete>
+    
+</mapper>
